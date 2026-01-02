@@ -1,0 +1,856 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Price List • Fall Premium</title>
+  <style>
+    :root{
+      --bg:#070A12;
+      --card: rgba(255,255,255,.06);
+      --stroke: rgba(255,255,255,.12);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.65);
+
+      --neonA:#00E5FF;
+      --neonB:#B400FF;
+      --neonC:#00FF85;
+      --danger:#FF3D71;
+
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
+      --radius: 18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background:
+        radial-gradient(900px 500px at 15% 10%, rgba(180,0,255,.18), transparent 60%),
+        radial-gradient(900px 500px at 85% 15%, rgba(0,229,255,.14), transparent 60%),
+        radial-gradient(900px 500px at 50% 95%, rgba(0,255,133,.10), transparent 60%),
+        var(--bg);
+      color:var(--text);
+      min-height:100vh;
+      padding:22px;
+    }
+    .wrap{max-width:1160px;margin:0 auto;}
+
+    .hero{
+      position:relative;
+      padding:26px 20px 18px;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(0,229,255,.10), rgba(180,0,255,.08), rgba(0,255,133,.06));
+      border:1px solid var(--stroke);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .glowline{
+      position:absolute; inset:-2px;
+      background: conic-gradient(from 180deg, var(--neonA), var(--neonB), var(--neonC), var(--neonA));
+      filter: blur(18px);
+      opacity:.25;
+      pointer-events:none;
+    }
+    .heroinner{
+      position:relative;
+      display:flex;
+      gap:14px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    .brand{display:flex; align-items:center; gap:10px;}
+    .logo{
+      width:44px; height:44px;
+      border-radius:14px;
+      background: linear-gradient(135deg, rgba(0,229,255,.95), rgba(180,0,255,.95));
+      box-shadow: 0 0 0 1px rgba(255,255,255,.18), 0 10px 30px rgba(180,0,255,.22);
+      position:relative;
+    }
+    .logo:after{
+      content:"";
+      position:absolute; inset:10px;
+      border-radius:10px;
+      background: rgba(0,0,0,.35);
+      border:1px solid rgba(255,255,255,.20);
+    }
+    .title{
+      font-size:18px;
+      font-weight:900;
+      letter-spacing:.2px;
+      margin:0;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .verified{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:18px;height:18px;
+      border-radius:999px;
+      background: rgba(0,229,255,.18);
+      border:1px solid rgba(0,229,255,.50);
+      color: var(--neonA);
+      font-size:12px;
+      box-shadow: 0 0 18px rgba(0,229,255,.20);
+    }
+    .sub{margin:4px 0 0; color: var(--muted); font-size:13px;}
+    .chips{display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end;}
+    .chip{
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.05);
+      color: rgba(255,255,255,.82);
+      font-size:12px;
+      backdrop-filter: blur(8px);
+    }
+    .chip.neon{
+      border-color: rgba(0,229,255,.45);
+      box-shadow: 0 0 22px rgba(0,229,255,.12);
+    }
+    .wa{
+      color: rgba(0,229,255,.95);
+      text-decoration:none;
+      border-bottom:1px dashed rgba(0,229,255,.45);
+    }
+
+    .grid{
+      margin-top:16px;
+      display:grid;
+      grid-template-columns: 1.4fr .6fr;
+      gap:14px;
+    }
+    @media (max-width: 980px){ .grid{grid-template-columns:1fr;} }
+
+    .card{
+      border-radius: var(--radius);
+      background: var(--card);
+      border:1px solid var(--stroke);
+      box-shadow: var(--shadow);
+      padding:16px;
+      backdrop-filter: blur(10px);
+      overflow:hidden;
+      position:relative;
+    }
+    .card:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: linear-gradient(135deg, rgba(0,229,255,.12), rgba(180,0,255,.10), rgba(0,255,133,.10));
+      opacity:.35;
+      filter: blur(18px);
+      pointer-events:none;
+    }
+    .card > *{position:relative}
+    .card h2{
+      margin:0 0 10px;
+      font-size:14px;
+      letter-spacing:.9px;
+      text-transform:uppercase;
+      color: rgba(255,255,255,.88);
+      display:flex; align-items:center; gap:10px;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:999px;
+      background: var(--neonA);
+      box-shadow: 0 0 18px rgba(0,229,255,.35);
+    }
+
+    .toolbar{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin: 10px 0 12px;
+    }
+    .search{
+      flex:1;
+      min-width: 220px;
+      padding:10px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.25);
+      color: rgba(255,255,255,.92);
+      outline:none;
+    }
+    .select{
+      padding:10px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.25);
+      color: rgba(255,255,255,.92);
+      outline:none;
+    }
+
+    .scroller{
+      margin-top: 6px;
+      display:flex;
+      gap:12px;
+      overflow:auto;
+      padding: 8px 4px 12px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .scroller::-webkit-scrollbar{height:10px}
+    .scroller::-webkit-scrollbar-thumb{
+      background: rgba(255,255,255,.12);
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .scroller::-webkit-scrollbar-track{background: rgba(0,0,0,.15); border-radius:999px}
+
+    .pitem{
+      min-width: 300px;
+      max-width: 300px;
+      scroll-snap-align: start;
+      border-radius: 18px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.24);
+      padding:14px;
+      position:relative;
+      overflow:hidden;
+    }
+    .pitem:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: linear-gradient(135deg, rgba(0,229,255,.18), rgba(180,0,255,.15), rgba(0,255,133,.12));
+      opacity:.22;
+      filter: blur(18px);
+      pointer-events:none;
+    }
+    .pitem > *{position:relative}
+
+    .toprow{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .pname{
+      font-weight:950;
+      letter-spacing:.2px;
+      margin:0;
+      font-size:15px;
+    }
+    .pcat{
+      margin-top:6px;
+      font-size:12px;
+      color: rgba(255,255,255,.62);
+    }
+    .badge{
+      font-size:11px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(0,229,255,.34);
+      background: rgba(0,229,255,.10);
+      color: rgba(210,250,255,.92);
+      white-space:nowrap;
+      box-shadow: 0 0 18px rgba(0,229,255,.10);
+    }
+
+    .pricebox{
+      margin-top:12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:10px 10px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+    }
+    .money{
+      font-weight:950;
+      font-size:16px;
+      letter-spacing:.2px;
+    }
+    .hint{
+      margin-top:10px;
+      font-size:12px;
+      color: rgba(255,255,255,.70);
+      line-height:1.45;
+    }
+
+    .orderbtn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(180,0,255,.38);
+      background: rgba(180,0,255,.10);
+      color: rgba(255,255,255,.92);
+      text-decoration:none;
+      font-size:12px;
+      transition:.15s ease;
+      white-space:nowrap;
+    }
+    .orderbtn:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 10px 26px rgba(180,0,255,.16);
+    }
+    .spark{color: var(--neonB)}
+
+    .reseller{
+      border-color: rgba(0,255,133,.28) !important;
+      background: rgba(0,255,133,.06) !important;
+    }
+    .reseller .badge{
+      border-color: rgba(0,255,133,.40);
+      background: rgba(0,255,133,.10);
+      color: rgba(0,255,133,.95);
+      box-shadow: 0 0 18px rgba(0,255,133,.12);
+    }
+    .benefits{
+      margin-top:10px;
+      display:grid;
+      gap:8px;
+    }
+    .brow{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding:10px 10px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      color: rgba(255,255,255,.78);
+      font-size:12px;
+      line-height:1.45;
+    }
+    .bicon{
+      width:22px;height:22px;border-radius:8px;
+      display:flex;align-items:center;justify-content:center;
+      font-weight:950;
+      border:1px solid rgba(0,255,133,.28);
+      background: rgba(0,255,133,.10);
+      color: rgba(255,255,255,.92);
+      flex:0 0 auto;
+    }
+
+    .qris{
+      display:flex; gap:12px; align-items:center;
+      border-radius: 16px;
+      border:1px solid rgba(0,255,133,.30);
+      background: rgba(0,255,133,.08);
+      padding:12px;
+    }
+    .qris img{
+      width:92px; height:92px;
+      object-fit:cover;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.25);
+    }
+    .ttl{font-weight:950}
+    .muted{color: var(--muted); font-size:12px; margin-top:4px; line-height:1.35}
+
+    .paycard{
+      margin-top:10px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.22);
+      padding:12px;
+    }
+    .payrow{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:10px 10px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      margin-top:10px;
+    }
+    .payrow .k{color:rgba(255,255,255,.75); font-size:12px;}
+    .payrow .v{font-weight:950; letter-spacing:.3px;}
+    .copybtn{
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid rgba(180,0,255,.38);
+      background: rgba(180,0,255,.10);
+      color: rgba(255,255,255,.90);
+      font-size:12px;
+      cursor:pointer;
+    }
+    .copybtn:hover{transform: translateY(-1px); box-shadow: 0 10px 26px rgba(180,0,255,.16);}
+
+    .proof{
+      margin-top:10px;
+      border-radius:16px;
+      border:1px solid rgba(0,229,255,.22);
+      background: rgba(0,229,255,.06);
+      padding:12px;
+    }
+    .proof b{color: rgba(255,255,255,.92)}
+    .steps{
+      margin-top:8px;
+      display:grid;
+      gap:8px;
+      font-size:12px;
+      color: rgba(255,255,255,.74);
+      line-height:1.5;
+    }
+    .step{
+      display:flex;
+      gap:10px;
+      padding:10px 10px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      align-items:flex-start;
+    }
+    .num{
+      width:22px;height:22px;
+      border-radius:8px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:950;
+      color: rgba(255,255,255,.92);
+      border:1px solid rgba(0,229,255,.28);
+      background: rgba(0,229,255,.10);
+      flex:0 0 auto;
+    }
+
+    .rules{
+      margin-top:10px;
+      font-size:12px;
+      color: rgba(255,255,255,.72);
+      line-height:1.55;
+      border-radius: 16px;
+      border:1px solid rgba(255,61,113,.28);
+      background: rgba(255,61,113,.06);
+      padding:12px;
+    }
+    .footer{
+      text-align:center;
+      margin-top:14px;
+      color: rgba(255,255,255,.55);
+      font-size:12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <section class="hero">
+      <div class="glowline"></div>
+      <div class="heroinner">
+        <div class="brand">
+          <div class="logo"></div>
+          <div>
+            <p class="title" id="brandTitle">FALL.ID <span class="verified">✔</span></p>
+            <p class="sub">Fall Premium • Scroll List • Fast Response</p>
+          </div>
+        </div>
+
+        <div class="chips">
+          <div class="chip neon">⚡ Ready Stock</div>
+          <div class="chip">💳 Dana / GoPay / QRIS</div>
+          <div class="chip">💬 Admin: <a class="wa" id="waTop" href="#" target="_blank" rel="noreferrer">WA Klik</a></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="grid">
+
+      <!-- LEFT -->
+      <section class="card">
+        <h2><span class="dot"></span> List Harga</h2>
+
+        <div class="toolbar">
+          <input class="search" id="search" placeholder="Cari item... contoh: canva / viu / spotify / tutor" />
+          <select class="select" id="filter">
+            <option value="all">Semua Kategori</option>
+            <option value="streaming">Streaming</option>
+            <option value="editing">Editing</option>
+            <option value="ai">AI</option>
+            <option value="tutor">Tutor</option>
+            <option value="bulk">Bulk App</option>
+            <option value="sosmed">Sosmed</option>
+            <option value="tools">Tools</option>
+            <option value="lainnya">Lainnya</option>
+          </select>
+        </div>
+
+        <div style="color: rgba(255,255,255,.62); font-size:12px; margin-top:4px;">
+          Geser ke kanan/kiri buat lihat item lainnya ✨
+        </div>
+
+        <div class="scroller" id="scroller"></div>
+      </section>
+
+      <!-- RIGHT -->
+      <aside class="card">
+        <h2><span class="dot" style="background:var(--neonB); box-shadow:0 0 18px rgba(180,0,255,.35);"></span> Payment & Bukti TF</h2>
+
+        <div class="qris">
+          <img src="https://files.catbox.moe/mhaku1.jpeg" alt="QRIS Admin (ganti file ini)">
+          <div>
+            <div class="ttl">QRIS JIKA TIDAK BISA MINTA KE ADMIN</div>
+          </div>
+        </div>
+
+        <div class="paycard">
+          <div style="font-weight:950; letter-spacing:.2px;">Dana & GoPay</div>
+
+          <div class="payrow">
+            <div>
+              <div class="k">DANA</div>
+              <div class="v" id="danaNo">0882003232638</div>
+            </div>
+            <button class="copybtn" onclick="copyText('danaNo')">Copy</button>
+          </div>
+
+          <div class="payrow">
+            <div>
+              <div class="k">GoPay</div>
+              <div class="v" id="gopayNo">0885645078263</div>
+            </div>
+            <button class="copybtn" onclick="copyText('gopayNo')">Copy</button>
+          </div>
+        </div>
+
+        <div class="proof">
+          <b>SS Bukti TF → Kirim ke Admin</b>
+          <div class="steps">
+            <div class="step"><div class="num">1</div><div>TF sesuai total harga item.</div></div>
+            <div class="step"><div class="num">2</div><div>Ambil SS bukti TF (nominal + tanggal jelas).</div></div>
+            <div class="step"><div class="num">3</div><div>Kirim SS + nama item ke admin via WA.</div></div>
+          </div>
+          <div class="muted" style="margin-top:8px;">
+            Klik cepat: <a class="wa" id="waProof" href="#" target="_blank" rel="noreferrer">Kirim Bukti TF</a>
+          </div>
+        </div>
+
+        <div class="rules">
+          <b>Rules singkat:</b><br>
+          • Tanya stok dulu sebelum TF.<br>
+          • Setelah TF wajib kirim SS bukti ke admin.<br>
+          • Harga bisa update sewaktu-waktu.
+        </div>
+
+        <div class="footer">© 2026 • Fall Premium</div>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    const ADMIN_WA  = "6285645078263"; // ganti
+    const HOST_NAME = "FALL.ID";   // ganti
+    const DANA_NO   = "0882003232638";  // ganti
+    const GOPAY_NO  = "0885645078263";  // ganti
+
+    // ===== Harga yang ADA dari teks lo =====
+    // yg belum ada -> DM Admin (tetep tampil)
+    const ITEMS = [
+      // ChatGPT (via invit)
+      { name:"ChatGPT 1B Gar 7h", category:"ai", price: 1900, badge:"READY" },
+      { name:"ChatGPT 1B No Gar", category:"ai", price: 1000, badge:"READY" },
+      { name:"ChatGPT 1Y Plan Go", category:"ai", price: 7000, badge:"READY" },
+
+      // Sharing strong
+      { name:"ChatGPT 1B Sharing 8U", category:"ai", price: 1500, badge:"STRONG" },
+
+      // Head / Owner acc
+      { name:"ChatGPT 1B Invit 5", category:"ai", price: 6400, badge:"OWNER" },
+
+      // Spotify
+      { name:"Spotify 1 Bulan Full Garansi", category:"streaming", price: 6500, badge:"POPULAR" },
+      { name:"Spotify 2 Bulan No Garansi", category:"streaming", price: 5000, badge:"VALUE" },
+      { name:"Spotify 1 Bulan Gar 7h", category:"streaming", price: 3500, badge:"READY" },
+      { name:"Spotify 1B No Garansi", category:"streaming", price: 2900, badge:"READY" },
+      { name:"Spotify 3B Individual", category:"streaming", price: 9500, badge:"HEMAT" },
+      { name:"Spotify 4B Individual", category:"streaming", price: 11000, badge:"HEMAT" },
+      { name:"Spotify Famplan (No Gar)", category:"streaming", price: 700, badge:"FAM" },
+
+      // YouTube
+      { name:"YouTube 1H Famplan", category:"streaming", price: 5, badge:"FAST" },
+      { name:"YouTube 1B Famplan", category:"streaming", price: 200, badge:"READY" },
+      { name:"YouTube 1B Famhead (Email baru)", category:"streaming", price: 1000, badge:"READY" },
+      { name:"YouTube 1B Indplan (Email baru)", category:"streaming", price: 1000, badge:"READY" },
+
+      // Canva (via invit)
+      { name:"Canva 1H", category:"editing", price: 1, badge:"FAST" },
+      { name:"Canva 1B", category:"editing", price: 8, badge:"READY" },
+      { name:"Canva 1B Admin", category:"editing", price: 100, badge:"ADMIN" },
+      { name:"Canva Lifetime", category:"editing", price: 85, badge:"VIP" },
+      { name:"Canva Admin Lifetime", category:"editing", price: 8000, badge:"VIP" },
+      { name:"Canva Head/Owner 1B", category:"editing", price: 1000, badge:"OWNER" },
+      { name:"Canva Head/Owner 2B", category:"editing", price: 2000, badge:"OWNER" },
+      { name:"Canva Head/Owner Lifetime", category:"editing", price: 19000, badge:"OWNER" },
+
+      // CapCut
+      { name:"CapCut 7H Acc B", category:"editing", price: 100, badge:"READY" },
+      { name:"CapCut 7H Acc S", category:"editing", price: 310, badge:"READY" },
+      { name:"CapCut 14H Gar 7H", category:"editing", price: 1000, badge:"GAR" },
+      { name:"CapCut 1B No Gar", category:"editing", price: 1000, badge:"READY" },
+      { name:"CapCut 1B Gar 7H", category:"editing", price: 1500, badge:"GAR" },
+      { name:"CapCut 1B Full Gar", category:"editing", price: 3000, badge:"BEST" },
+      { name:"CapCut 35H Private Gar 7H", category:"editing", price: 2300, badge:"PRIVATE" },
+      { name:"CapCut Sharing 7H", category:"editing", price: 200, badge:"SHARE" },
+      { name:"CapCut Sharing 1B Gar 7H", category:"editing", price: 950, badge:"SHARE" },
+      { name:"CapCut Sharing 35H Gar 7H", category:"editing", price: 1000, badge:"SHARE" },
+
+      // Viu (pricelist vid ada yg 4p/9p)
+      { name:"Viu 1Y", category:"streaming", price: 4, badge:"READY" },
+      { name:"Viu Lifetime", category:"streaming", price: 9, badge:"VIP" },
+
+      // iQIYI
+      { name:"iQIYI 1 Bulan Standar", category:"streaming", price: 1300, badge:"READY" },
+      { name:"iQIYI 1 Bulan Premium", category:"streaming", price: 2000, badge:"READY" },
+      { name:"iQIYI 1 Tahun Standar", category:"streaming", price: 4500, badge:"HEMAT" },
+      { name:"iQIYI 1 Tahun Premium", category:"streaming", price: 5300, badge:"HEMAT" },
+
+      // WeTV (harga belum ada)
+      { name:"WeTV 1 Bulan Sharing 8U", category:"streaming", price: "DM", badge:"DM" },
+      { name:"WeTV 1 Bulan Sharing 5U", category:"streaming", price: "DM", badge:"DM" },
+      { name:"WeTV 1 Bulan Sharing 3U", category:"streaming", price: "DM", badge:"DM" },
+      { name:"WeTV 1 Bulan Private", category:"streaming", price: "DM", badge:"DM" },
+
+      // Vidio (harga belum lengkap—tetep tampil)
+      { name:"Vidio 1Y TV No Gar", category:"streaming", price: 300, badge:"READY" },
+      { name:"Vidio 1Y TV Gar 1B", category:"streaming", price: 600, badge:"GAR" },
+      { name:"Vidio 1B Mobile", category:"streaming", price: 16900, badge:"MOBILE" },
+      { name:"Vidio Sharing 2U Mobile 1B", category:"streaming", price: 8600, badge:"SHARE" },
+
+      // Wink (harga ada)
+      { name:"Wink 7H Private", category:"editing", price: 170, badge:"READY" },
+      { name:"Wink 7H iOS", category:"editing", price: 3000, badge:"iOS" },
+
+      // Bulk App (yang ada harga dari teks lo)
+      { name:"Bulk Viu 1Y 10 Acc", category:"bulk", price: 50, badge:"BULK" },
+      { name:"Bulk Viu 1Y 20 Acc", category:"bulk", price: 90, badge:"BULK" },
+      { name:"Bulk Viu 1Y 50 Acc", category:"bulk", price: 200, badge:"BULK" },
+      { name:"Bulk Viu 1Y 100 Acc", category:"bulk", price: 400, badge:"BULK" },
+      { name:"Bulk Viu Lifetime 10 Acc", category:"bulk", price: 60, badge:"BULK" },
+      { name:"Bulk Viu Lifetime 20 Acc", category:"bulk", price: 100, badge:"BULK" },
+      { name:"Bulk Viu Lifetime 50 Acc", category:"bulk", price: 250, badge:"BULK" },
+      { name:"Bulk Viu Lifetime 100 Acc", category:"bulk", price: 500, badge:"BULK" },
+      { name:"Bulk Viu Lifetime 200 Acc", category:"bulk", price: 990, badge:"BULK" },
+
+      { name:"Canva Lifetime 10 Acc (Bulk)", category:"bulk", price: 600, badge:"BULK" },
+      { name:"Bulk Wink 7H 10 Acc", category:"bulk", price: 1600, badge:"BULK" },
+      { name:"CapCut 7H 10 Acc (Bulk)", category:"bulk", price: 2700, badge:"BULK" },
+
+      // Tutor aplikasi premium (tanpa harga -> DM admin tapi tetap muncul)
+      { name:"Take All Tutor 120+ (Paket)", category:"tutor", price: 9000, badge:"BEST" },
+      { name:"Tutor HBO", category:"tutor", price:"DM", badge:"DM" },
+      { name:"Tutor Viu", category:"tutor", price:"DM", badge:"DM" },
+      { name:"Tutor Netflix AOH", category:"tutor", price:"DM", badge:"DM" },
+      { name:"Daftar MasterCart", category:"tutor", price:"DM", badge:"DM" },
+      { name:"Tutor YouTube", category:"tutor", price:"DM", badge:"DM" },
+      { name:"Tutor Spotify", category:"tutor", price:"DM", badge:"DM" },
+      { name:"Tutor iFlix", category:"tutor", price:"DM", badge:"DM" },
+      { name:"Tutor Wattpad", category:"tutor", price:"DM", badge:"DM" },
+      { name:"Tutor iQIYI", category:"tutor", price:"DM", badge:"DM" },
+      { name:"Tutor Canva", category:"tutor", price:"DM", badge:"DM" },
+      { name:"Tutor Apple Music", category:"tutor", price:"DM", badge:"DM" },
+      { name:"Tutor Scribd", category:"tutor", price:"DM", badge:"DM" },
+      { name:"Tutor Deezer", category:"tutor", price:"DM", badge:"DM" },
+      { name:"Tutor Viki Pass", category:"tutor", price:"DM", badge:"DM" },
+      { name:"Tutor Disney", category:"tutor", price:"DM", badge:"DM" },
+      { name:"Tutor Resso", category:"tutor", price:"DM", badge:"DM" },
+      { name:"Tutor JOOX", category:"tutor", price:"DM", badge:"DM" },
+      { name:"Tutor Netflix No Modal", category:"tutor", price:"DM", badge:"DM" },
+      { name:"Tutor Netflix AOH Luar", category:"tutor", price:"DM", badge:"DM" },
+      { name:"Tutor Disney Luar", category:"tutor", price:"DM", badge:"DM" },
+      { name:"Tutor YouTube Modal 1x", category:"tutor", price:"DM", badge:"DM" },
+      { name:"Tutor Hulu", category:"tutor", price:"DM", badge:"DM" },
+      { name:"Tutor Quibi", category:"tutor", price:"DM", badge:"DM" },
+      { name:"Tutor Nichi", category:"tutor", price:"DM", badge:"DM" },
+      { name:"Tutor Wink Unlimited", category:"tutor", price:"DM", badge:"DM" },
+      { name:"Web Berguna Untuk Jualan", category:"tutor", price:"DM", badge:"DM" },
+      { name:"Cara Random", category:"tutor", price:"DM", badge:"DM" },
+      { name:"App Ngasilin Duit", category:"tutor", price:"DM", badge:"DM" },
+      { name:"Tutor Buat Logo", category:"tutor", price:"DM", badge:"DM" },
+      { name:"Top Pulsa & Kuota", category:"tutor", price:"DM", badge:"DM" },
+      { name:"Layanan Sosmed", category:"tutor", price:"DM", badge:"DM" },
+      { name:"Tutor Remini", category:"tutor", price:"DM", badge:"DM" },
+      { name:"Tutor Amazon Prime", category:"tutor", price:"DM", badge:"DM" },
+      { name:"Tutor Picsart", category:"tutor", price:"DM", badge:"DM" },
+      { name:"Tutor Vidio", category:"tutor", price:"DM", badge:"DM" },
+      { name:"Tutor WeTV", category:"tutor", price:"DM", badge:"DM" },
+
+      // Sosmed / paket fyp (harga ada)
+      { name:"Paket TikTok (A) 1000 Like + 2500 Views", category:"sosmed", price: 1000, badge:"TT" },
+      { name:"Paket TikTok (B) 2000 Like + 4000 Views", category:"sosmed", price: 2800, badge:"TT" },
+      { name:"Paket TikTok (C) 500 Like + 1000 Views", category:"sosmed", price: 500, badge:"TT" },
+      { name:"Paket IG (A) 1000 Like + 2000 Views", category:"sosmed", price: 1500, badge:"IG" },
+      { name:"Paket IG (B) 500 Like + 1000 Views", category:"sosmed", price: 700, badge:"IG" },
+      { name:"Paket Jumbo TT (A) 10000 Like + 15000 Views", category:"sosmed", price: 7500, badge:"JUMBO" },
+      { name:"Paket Jumbo TT (B) 13000 Like + 20000 Views", category:"sosmed", price: 10000, badge:"JUMBO" },
+
+      // Noko (harga ada)
+      { name:"Nokos Indo (Nokwa No Gar)", category:"tools", price: 2300, badge:"NOKOS" },
+      { name:"Nokos Indo (Nokwa Gar 1B)", category:"tools", price: 5500, badge:"NOKOS" },
+      { name:"Nokos 450+ Grup JPM Gar 1B", category:"tools", price: 17000, badge:"NOKOS" },
+      { name:"Nokos APK", category:"tools", price: 300, badge:"NOKOS" },
+      { name:"Nokos Sampai Kartu Mati", category:"tools", price: 13000, badge:"NOKOS" },
+      { name:"Nokos Africa", category:"tools", price: 3800, badge:"NOKOS" },
+      { name:"Nokos Filipina", category:"tools", price: 5800, badge:"NOKOS" },
+      { name:"Nokos Kenya", category:"tools", price: 4000, badge:"NOKOS" },
+      { name:"Nokos South Africa", category:"tools", price: 3500, badge:"NOKOS" },
+      { name:"Nokos Vietnam", category:"tools", price: 5700, badge:"NOKOS" },
+      { name:"Nokos Hongkong", category:"tools", price: 6000, badge:"NOKOS" },
+      { name:"Nokos Afica (varian)", category:"tools", price: 1200, badge:"NOKOS" },
+
+      // AM (acc private)
+      { name:"AM Acc (Private) 1Y Gene", category:"tools", price: 2, badge:"AM" },
+      { name:"AM Acc (Private) 1Y Acc B", category:"tools", price: 20, badge:"AM" },
+
+      // Youku (harga ada)
+      { name:"Youku 1B", category:"streaming", price: 1500, badge:"READY" },
+      { name:"Youku 1Y", category:"streaming", price: 3000, badge:"HEMAT" },
+
+      // Netflix (sharing) - harga ada
+      { name:"Netflix 2U 1D", category:"streaming", price: 500, badge:"NETFLIX" },
+      { name:"Netflix 1U 1D", category:"streaming", price: 800, badge:"NETFLIX" },
+      { name:"Netflix 1U 2D", category:"streaming", price: 1200, badge:"NETFLIX" },
+      { name:"Netflix 1U 7D", category:"streaming", price: 6000, badge:"NETFLIX" },
+      { name:"Netflix 1U 1B", category:"streaming", price: 15000, badge:"NETFLIX" },
+      { name:"Netflix 2U 1B", category:"streaming", price: 9000, badge:"NETFLIX" },
+      { name:"Netflix Semi (Gar 20D)", category:"streaming", price: 18500, badge:"GAR" }
+    ];
+
+    const RESELLER = {
+      name: "RESELLER APP PREM",
+      category: "lainnya",
+      price: 20000,
+      badge: "VIP",
+      benefits: [
+        "Benefit: bisa chat admin langsung.",
+        "Dapat info update & arahan order biar lancar.",
+        "Support fast respon sesuai jam admin."
+      ]
+    };
+
+    const brandTitle = document.getElementById("brandTitle");
+    const waTop = document.getElementById("waTop");
+    const waProof = document.getElementById("waProof");
+    const danaNo = document.getElementById("danaNo");
+    const gopayNo = document.getElementById("gopayNo");
+
+    brandTitle.innerHTML = `${HOST_NAME} <span class="verified">✔</span>`;
+    waTop.href = `https://wa.me/${ADMIN_WA}`;
+    waProof.href = `https://wa.me/${ADMIN_WA}?text=${encodeURIComponent("Halo Admin, aku sudah transfer. Ini SS bukti TF + item:")}`;
+    danaNo.textContent = DANA_NO;
+    gopayNo.textContent = GOPAY_NO;
+
+    function copyText(id){
+      const el = document.getElementById(id);
+      const t = el.textContent.trim();
+      navigator.clipboard.writeText(t).then(()=>{
+        el.textContent = t + " ✓";
+        setTimeout(()=> el.textContent = t, 900);
+      });
+    }
+    window.copyText = copyText;
+
+    const rupiah = (v) => {
+      if (v === "DM") return "DM Admin";
+      const num = Number(String(v).replace(/[^\d]/g,""));
+      if (!Number.isFinite(num)) return "DM Admin";
+      return "Rp " + num.toLocaleString("id-ID");
+    };
+
+    const waLink = (itemName, priceLabel) =>
+      `https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(`Halo Admin, mau order ${itemName}. Harga: ${priceLabel}`)}`;
+
+    const scroller = document.getElementById("scroller");
+    const search = document.getElementById("search");
+    const filter = document.getElementById("filter");
+
+    function cardItem(it){
+      const priceLabel = rupiah(it.price);
+      const badge = it.badge ? `<div class="badge">${it.badge}</div>` : `<div class="badge">READY</div>`;
+      return `
+        <div class="pitem">
+          <div class="toprow">
+            <div>
+              <p class="pname">${it.name}</p>
+              <div class="pcat">${it.category.toUpperCase()}</div>
+            </div>
+            ${badge}
+          </div>
+
+          <div class="pricebox">
+            <div class="money">${priceLabel}</div>
+            <a class="orderbtn" href="${waLink(it.name, priceLabel)}" target="_blank" rel="noreferrer">
+              Order <span class="spark">✦</span>
+            </a>
+          </div>
+
+          <div class="hint">Kalau “DM Admin” tinggal chat admin buat cek stok & detail.</div>
+        </div>
+      `;
+    }
+
+    function cardReseller(r){
+      const priceLabel = rupiah(r.price);
+      const benefits = r.benefits.map((t,i)=>`
+        <div class="brow"><div class="bicon">${i+1}</div><div>${t}</div></div>
+      `).join("");
+
+      return `
+        <div class="pitem reseller">
+          <div class="toprow">
+            <div>
+              <p class="pname">${r.name}</p>
+              <div class="pcat">${r.category.toUpperCase()}</div>
+            </div>
+            <div class="badge">${r.badge}</div>
+          </div>
+
+          <div class="pricebox" style="border-color: rgba(0,255,133,.22);">
+            <div class="money">${priceLabel}</div>
+            <a class="orderbtn" style="border-color: rgba(0,255,133,.32); background: rgba(0,255,133,.10);"
+               href="${waLink(r.name, priceLabel)}" target="_blank" rel="noreferrer">
+              Chat Admin <span class="spark" style="color: var(--neonC)">✦</span>
+            </a>
+          </div>
+
+          <div class="benefits">${benefits}</div>
+        </div>
+      `;
+    }
+
+    function render(){
+      const q = (search.value || "").toLowerCase().trim();
+      const f = filter.value;
+
+      const list = ITEMS.filter(it => {
+        const matchText = it.name.toLowerCase().includes(q) || it.category.toLowerCase().includes(q);
+        const matchCat = (f === "all") ? true : it.category === f;
+        return matchText && matchCat;
+      });
+
+      scroller.innerHTML = cardReseller(RESELLER) + (list.length ? list.map(cardItem).join("") : `
+        <div class="pitem">
+          <div class="toprow">
+            <div>
+              <p class="pname">Nggak ketemu</p>
+              <div class="pcat">COBA KATA LAIN</div>
+            </div>
+            <div class="badge">INFO</div>
+          </div>
+          <div class="hint">Coba cari: canva / viu / spotify / tutor / bulk. Atau chat admin aja.</div>
+          <div class="pricebox">
+            <div class="money">DM Admin</div>
+            <a class="orderbtn" href="https://wa.me/${ADMIN_WA}" target="_blank" rel="noreferrer">
+              Chat Admin <span class="spark">✦</span>
+            </a>
+          </div>
+        </div>
+      `);
+    }
+
+    search.addEventListener("input", render);
+    filter.addEventListener("change", render);
+    render();
+  </script>
+</body>
+</html>
